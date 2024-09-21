@@ -36,7 +36,15 @@ class TaskTracker {
   }
   async removeTask() {}
 
-  async MarkTaskCompleted() {}
+  async MarkTaskCompleted(id) {
+    const task = this.tasks.find((t) => t.id === id);
+    if (task) {
+      task.completed = true;
+      await this.SaveTask();
+      return true;
+    }
+    return false;
+  }
   ListTask() {
     return this.tasks;
   }
