@@ -1,5 +1,9 @@
 const fs = require("fs").promises;
 const path = require("path");
+const {
+  reduceEachTrailingCommentRange,
+  resolveTripleslashReference,
+} = require("typescript");
 
 class TaskTracker {
   constructor(filename = "task.json") {
@@ -34,7 +38,24 @@ class TaskTracker {
     await this.SaveTask();
     return task;
   }
-  async removeTask() {}
+  //   async removeTask(id) {
+  //     const task = this.tasks.find((t) => t.id === id);
+  //     if (task) {
+  //       this.tasks = this.tasks.filter((t) => t.id != id);
+  //       await this.SaveTask();
+  //       return true;
+  //     }
+  //     return false;
+  //   } // COULD BE USED BUT INEFFICIENT FOR LARGER ARRAYS
+  async removeTask(id) {
+    const InitialLength = this.tasks.length;
+    this.tasks = this.tasks.filter((t) => t.id != id);
+    if (InitialLength > this.tasks.length) {
+      await this.SaveTask();
+      return true;
+    }
+    return false;
+  }
 
   async MarkTaskCompleted(id) {
     const task = this.tasks.find((t) => t.id === id);
