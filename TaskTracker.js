@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const path = require("path");
 
 class TaskTracker {
@@ -37,6 +37,10 @@ class TaskTracker {
   async removeTask() {}
 
   async MarkTaskCompleted() {}
-  async ListTask() {}
-  async SaveTask() {}
+  ListTask() {
+    return this.tasks;
+  }
+  async SaveTask() {
+    await fs.writeFile(this.filename, JSON.stringify(this.tasks, null, 2));
+  }
 }
