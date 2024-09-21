@@ -1,10 +1,5 @@
-import TaskTracker from "./TaskTracker.js";
 import inquirer from "inquirer";
-const taskTracker = new TaskTracker();
-
 async function MainMenu() {
-  console.log("Welcome To CLI for TaskTracking !!");
-
   const { choice } = await inquirer.prompt([
     {
       type: "list",

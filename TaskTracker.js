@@ -1,9 +1,9 @@
-const fs = require("fs").promises;
-const path = require("path");
-const {
-  reduceEachTrailingCommentRange,
-  resolveTripleslashReference,
-} = require("typescript");
+import { promises as fs } from "fs"; // Importing promises from the fs module
+import path from "path"; // Importing the path module
+// const {
+//   reduceEachTrailingCommentRange,
+//   resolveTripleslashReference,
+// } = require("typescript");
 
 class TaskTracker {
   constructor(filename = "task.json") {
@@ -73,3 +73,6 @@ class TaskTracker {
     await fs.writeFile(this.filename, JSON.stringify(this.tasks, null, 2));
   }
 }
+// module.exports = TaskTracker;
+
+export default TaskTracker;
