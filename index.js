@@ -20,15 +20,42 @@ async function MainMenu() {
       ],
     },
   ]);
-
   switch (choice) {
     case "Add a Task":
-      await taskTracker.addTask();
+      await addTask();
       break;
-
+    case "List all Tasks":
+      await ListTask();
     default:
       break;
   }
+
+  async function addTask() {
+    const { title, description, dueDate } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "title",
+        message: "Enter task title",
+      },
+      {
+        type: "input",
+        name: "description",
+        message: "Enter task description",
+      },
+      {
+        type: "input",
+        name: "dueDate",
+        message: "Enter task DueDate",
+      },
+    ]);
+    taskTracker.addTask(title, description, dueDate);
+    console.log("Task added Successfully! ");
+  }
+}
+
+async function ListTask() {
+  const tasks = taskTracker.ListTask();
+  console.log(tasks);
 }
 
 MainMenu();

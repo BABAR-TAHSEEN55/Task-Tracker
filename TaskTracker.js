@@ -15,6 +15,8 @@ class TaskTracker {
     try {
       const data = await fs.readFile(this.filename, "utf-8");
       this.tasks = JSON.parse(data);
+      // console.log(data);
+      // console.log(this.tasks);
     } catch (error) {
       if (error.code === "ENOENT") {
         console.log(
