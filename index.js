@@ -27,6 +27,13 @@ async function MainMenu() {
       break;
     case "List all Tasks":
       await ListTask();
+    case "Save Tasks":
+      await SaveTask();
+    case "Remove Tasks":
+      await removeTask();
+    case "Mark Tasks Completed":
+      await MarkTaskCompleted();
+
     default:
       break;
   }
@@ -56,7 +63,57 @@ async function MainMenu() {
 
 async function ListTask() {
   const tasks = taskTracker.ListTask();
-  console.log(tasks);
+  console.table(tasks);
 }
 
+// async function SaveTask() {
+//   const save = await taskTracker.SaveTask();
+//   if (save) {
+//     console.log("Task Saved Successfully");
+//   } else {
+//     console.log("Task not found ");
+//   }
+// }
+
+async function removeTask() {
+  const tasks = taskTracker.removeTask();
+  if (tasks.length === 0) {
+    console.log("No Tasks to remove  ");
+    return;
+  }
+  const { taskId } = await inquirer.prompt([
+    {
+      type: "input",
+      name: "taskId",
+      message: "Enter TaskId",
+    },
+  ]);
+  const removed = await taskTracker.removeTask(taskId);
+  if (removed) {
+    console.log("Task removed successfully");
+  } else {
+    console.log("Task not found ");
+  }
+}
+async function MarkTaskCompleted() {
+  const tasks = await taskTracker.ListTask();
+  if (tasks.length === 0) {
+    console.log("No Tasks can be found ");
+    return;
+  }
+  const { taskId } = await inquirer.prompt([
+    {
+      type: "input",
+      name: "taskId",
+      message: "Enter taskId",
+    },
+  ]);
+
+  const MarkCompleted = await taskTracker.MarkTaskCompleted(taskId);
+  if (MarkCompleted) {
+    console.log("Task Completed");
+  } else {
+    console.log("Task is not Completed yet!");
+  }
+}
 MainMenu();
