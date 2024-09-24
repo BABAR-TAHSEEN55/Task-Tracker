@@ -1,6 +1,7 @@
 import TaskTracker from "./TaskTracker.js";
 import inquirer from "inquirer";
 const taskTracker = new TaskTracker();
+await taskTracker.LoadTasks();
 
 async function MainMenu() {
   console.log("Welcome To CLI for TaskTracking !!");
