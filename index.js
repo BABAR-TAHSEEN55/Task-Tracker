@@ -38,6 +38,7 @@ async function MainMenu() {
       await MarkTaskCompleted();
       break;
     case "Exit":
+      console.log("Thank you for using CLI !!");
       process.exit(0);
   }
   //TODO : 1) Adding Colors , 2 ) After Exiting : Thank you For using CLI Inteface  3) Do you want to exit the Cli or want to write another task?
@@ -113,17 +114,22 @@ async function MarkTaskCompleted() {
   }
   const { taskId } = await inquirer.prompt([
     {
-      type: "input",
+      type: "number",
       name: "taskId",
       message: "Enter taskId",
     },
   ]);
-
+  console.log({ taskId });
   const MarkCompleted = await taskTracker.MarkTaskCompleted(taskId);
-  if (MarkCompleted) {
-    console.log("Task Completed");
+  if (taskId === undefined) {
+    console.log("Please enter a valid TaskId");
+    return;
   } else {
-    console.log("Task is not Completed yet!");
+    if (MarkCompleted) {
+      console.log("Task Completed");
+    } else {
+      console.log("Task is not Completed yet!");
+    }
   }
 }
 MainMenu();

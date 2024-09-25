@@ -4,7 +4,7 @@
     "title": "Learn German ",
     "description": "German Learning ",
     "dueDate": "todya",
-    "completed": false,
+    "completed": true,
     "createdAt": "2024-09-25T09:23:05.175Z"
   },
   {
@@ -12,7 +12,7 @@
     "title": "Learn Obsidian",
     "description": "---",
     "dueDate": "Tomorrow",
-    "completed": false,
+    "completed": true,
     "createdAt": "2024-09-25T09:23:27.975Z"
   }
 ]
