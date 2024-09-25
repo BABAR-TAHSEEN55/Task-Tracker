@@ -96,7 +96,7 @@ async function removeTask() {
   }
 }
 async function MarkTaskCompleted() {
-  const tasks = await taskTracker.ListTask();
+  const tasks = taskTracker.ListTask();
   if (tasks.length === 0) {
     console.log("No Tasks can be found ");
     return;
