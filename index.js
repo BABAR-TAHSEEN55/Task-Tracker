@@ -27,16 +27,20 @@ async function MainMenu() {
       break;
     case "List all Tasks":
       await ListTask();
+      break;
     case "Save Tasks":
       await SaveTask();
+      break;
     case "Remove Tasks":
       await removeTask();
+      break;
     case "Mark Tasks Completed":
       await MarkTaskCompleted();
-
-    default:
       break;
+    case "Exit":
+      process.exit(0);
   }
+  //TODO : 1) Adding Colors , 2 ) After Exiting : Thank you For using CLI Inteface  3) Do you want to exit the Cli or want to write another task?
 
   async function addTask() {
     const { title, description, dueDate } = await inquirer.prompt([
@@ -66,14 +70,20 @@ async function ListTask() {
   console.table(tasks);
 }
 
-// async function SaveTask() {
-//   const save = await taskTracker.SaveTask();
-//   if (save) {
-//     console.log("Task Saved Successfully");
-//   } else {
-//     console.log("Task not found ");
-//   }
-// }
+async function SaveTask() {
+  // const save = await taskTracker.SaveTask();
+  // if (save) {
+  //   console.log("Task Saved Successfully");
+  // } else {
+  //   console.log("Task not found ");
+  // }
+  try {
+    await taskTracker.SaveTask();
+    console.log("Task saved Successfully");
+  } catch (error) {
+    console.log("Error found ", error);
+  }
+}
 
 async function removeTask() {
   const tasks = taskTracker.removeTask();

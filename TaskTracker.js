@@ -9,6 +9,7 @@ class TaskTracker {
   constructor(filename = "task.json") {
     this.filename = filename;
     this.tasks = [];
+    this.nextId = 1;
   }
 
   async LoadTasks() {
@@ -17,6 +18,7 @@ class TaskTracker {
       this.tasks = JSON.parse(data);
       // console.log(data);
       // console.log(this.tasks);
+      this.nextId = Math.max(...this.tasks.map((task) => task.id), 0) + 1;
     } catch (error) {
       if (error.code === "ENOENT") {
         console.log(
@@ -29,7 +31,7 @@ class TaskTracker {
 
   async addTask(title, description, dueDate) {
     const task = {
-      id: this.tasks.length + 1,
+      id: this.nextId++,
       title,
       description,
       dueDate,
