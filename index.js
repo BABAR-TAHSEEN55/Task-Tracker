@@ -42,7 +42,6 @@ async function MainMenu() {
       console.log("Thank you for using CLI");
       process.exit(0);
   }
-  //TODO : 1) Adding Colors , 2 ) After Exiting : Thank you For using CLI Inteface  3) Do you want to exit the Cli or want to write another task?
 
   async function addTask() {
     const { title, description, dueDate } = await inquirer.prompt([
@@ -134,3 +133,12 @@ async function MarkTaskCompleted() {
   }
 }
 MainMenu();
+
+/* Things to do and Follow Up Quesitons : 
+1. Create a repository
+2. Push al code 
+3. Write README.md file
+4.Is this an API ? 
+
+
+*/
